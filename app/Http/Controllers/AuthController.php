@@ -12,8 +12,8 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $this->validate($request, [
-            'username' => 'required|username',
-            'password' => 'required|min:6'
+            'username' => 'required',
+            'password' => 'required'
         ]);
 
         $username = $request->input('username');
