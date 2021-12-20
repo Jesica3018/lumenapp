@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use stdClass;
 
 class AuthController extends Controller
 {
@@ -28,13 +29,16 @@ class AuthController extends Controller
         if (!$isValidPassword) {
             return response()->json(['message' => 'Login failed'], 401);
         }
-
+        
         $generateToken = bin2hex(random_bytes(40));
         $user->update([
             'token' => $generateToken
         ]);
 
-        return response()->json($user);
+        $api = new \stdClass();
+        $api->data_user = $user;
+        return response()->json($api);
+
     }
 
     public function logout(Request $request){
