@@ -27,6 +27,11 @@ class UserController extends Controller
             'notelpon' => $notelpon,
             'alamat' => $alamat
         ]);
+        
+        $generateToken = bin2hex(random_bytes(40));
+        $user->update([
+            'token' => $generateToken
+        ]);
 
         $api = new \stdClass();
         $api->register_user = $user;
