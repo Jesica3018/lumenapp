@@ -28,4 +28,7 @@ $router->post('/login','AuthController@login');
 
 $router->group(['middleware' => 'auth'], function() use ($router){
     $router->post('/logout', 'AuthController@logout');
+    $router->get('api/user/{id}', 'UserController@show');
+    $router->post('api/ubahDataUser/{id}', 'UserController@ubahDataDiri');
+    $router->post('api/ubahSandi/{id}', 'UserController@ubahSandi');
 });
