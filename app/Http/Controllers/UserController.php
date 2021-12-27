@@ -29,7 +29,7 @@ class UserController extends Controller
         ]);
 
         $api = new \stdClass();
-        $api->data_user = $user;
+        $api->register_user = $user;
         return response()->json($api);
     }
 }
