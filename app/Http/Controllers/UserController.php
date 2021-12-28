@@ -37,4 +37,30 @@ class UserController extends Controller
         $api->register_user = $user;
         return response()->json($api);
     }
+    
+    public function show($id){
+        $listUser = new \stdClass();
+        $data2 = DB::table('users')
+                ->where('id', $id)->get();
+        $listUser->user = $data2;
+        return response()->json($listUser); 
+    }
+
+    public function ubahDataDiri(Request $request, $id){
+        $this->validate($request, [
+            'username' => 'required',
+            'notelpon' => 'required',
+            'alamat' => 'required'
+        ]);
+        $user = User::where('id', $id)->first();
+        $username = $request->input('username');
+        $notelpon = $request->input('notelpon');
+        $alamat = $request->input('alamat');
+        $user->update([
+            'username' => $username,
+            'notelpon' => $notelpon,
+            'alamat' => $alamat
+        ]);
+        return response()->json(['message' => 'Data diri berhasil diubah']);
+    }
 }
