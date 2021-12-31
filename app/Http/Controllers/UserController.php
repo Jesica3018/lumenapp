@@ -67,7 +67,7 @@ class UserController extends Controller
     public function ubahSandi(Request $request){
         $auth = Auth::user();
         
-        $password = $request->input('password');
+         $password = Hash::make($request->input('password'));
         
         $user = User::find($auth->id);
         $user->update([
