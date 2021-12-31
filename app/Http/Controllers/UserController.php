@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use stdClass;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -62,5 +63,17 @@ class UserController extends Controller
             'alamat' => $alamat
         ]);
         return response()->json(['message' => 'Data diri berhasil diubah']);
+    }
+    public function ubahSandi(Request $request){
+        $auth = Auth::user();
+        
+        $password = $request->input('password');
+        
+        $user = User::find($auth->id);
+        $user->update([
+            'password' => $password
+        ]);
+        return response()->json(['message' => 'Password berhasil diubah']);
+        
     }
 }
