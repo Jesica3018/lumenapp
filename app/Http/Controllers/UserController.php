@@ -47,16 +47,14 @@ class UserController extends Controller
         return response()->json($listUser); 
     }
 
-    public function ubahDataDiri(Request $request, $id){
-        $this->validate($request, [
-            'username' => 'required',
-            'notelpon' => 'required',
-            'alamat' => 'required'
-        ]);
-        $user = User::where('id', $id)->first();
+    public function ubahDataDiri(Request $request){
+        $auth = Auth::user();
+        
         $username = $request->input('username');
         $notelpon = $request->input('notelpon');
         $alamat = $request->input('alamat');
+        
+        $user = User::find($auth->id);
         $user->update([
             'username' => $username,
             'notelpon' => $notelpon,
@@ -64,16 +62,16 @@ class UserController extends Controller
         ]);
         return response()->json(['message' => 'Data diri berhasil diubah']);
     }
+    
     public function ubahSandi(Request $request){
         $auth = Auth::user();
         
-         $password = Hash::make($request->input('password'));
+        $password = Hash::make($request->input('password'));
         
         $user = User::find($auth->id);
         $user->update([
             'password' => $password
         ]);
-        return response()->json(['message' => 'Password berhasil diubah']);
-        
+        return response()->json(['message' => 'Password berhasil diubah']);   
     }
 }
