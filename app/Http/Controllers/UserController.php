@@ -39,12 +39,12 @@ class UserController extends Controller
         return response()->json($api);
     }
     
-    public function show($id){
-        $listUser = new \stdClass();
-        $data2 = DB::table('users')
-                ->where('id', $id)->get();
-        $listUser->user = $data2;
-        return response()->json($listUser); 
+    public function show(){
+        $auth = Auth::user();
+        $user = User::where('id',$auth->id)->first();
+        $api = new \stdClass();
+        $api->detail_user = $user;
+        return response()->json($api); 
     }
 
     public function ubahDataDiri(Request $request){
