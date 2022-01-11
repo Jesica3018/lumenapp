@@ -33,4 +33,5 @@ $router->group(['middleware' => 'auth'], function() use ($router){
     $router->post('api/ubahSandi', 'UserController@ubahSandi');
     
     $router->get('api/kebutuhan/{kategori}','KebutuhanController@kebutuhan');
+    $router->get('api/detailKebutuhan/{id}','KebutuhanController@detailKebutuhan');
 });
