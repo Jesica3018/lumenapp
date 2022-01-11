@@ -19,7 +19,7 @@ class KebutuhanController extends Controller
      return response()->json($api); 
    }
     
-    public function detailkebutuhan($id){
+    public function detailKebutuhan($id){
      $api = new \stdClass();
      $kebutuhan = Kebutuhan::where('id',$id)->get();
      $api->kebutuhan = $kebutuhan;
